@@ -16,6 +16,7 @@ namespace BankAccount.BusinessLogic
         /// </summary>
         private Dictionary<Currency, Money> currencyBalance = new Dictionary<Currency, Money>();
         private bool isClosed;
+        private bool isFreezed;
 
         public BankAccount(Guid userId, IEnumerable<Currency> currencies)
         {
@@ -50,6 +51,11 @@ namespace BankAccount.BusinessLogic
 
             this.currencyBalance[currency] -= amount;
 
+            if (!this.isFreezed)
+            {
+                this.isFreezed = true;
+            }
+
             return amount;
         }
 
@@ -61,6 +67,11 @@ namespace BankAccount.BusinessLogic
             }
 
             this.currencyBalance[currency] += amount;
+
+            if (!this.isFreezed)
+            {
+                this.isFreezed = true;
+            }
         }
 
         public void VerifyAccount()
@@ -95,7 +106,40 @@ namespace BankAccount.BusinessLogic
                 throw new InvalidOperationException("forbiden operation");
             }
 
+            if (!this.isVerified)
+            {
+                throw new InvalidOperationException("forbiden operation");
+            }
+
             this.isClosed = true;
+        }
+
+        public void FreezeAccount()
+        {
+            if (this.isClosed)
+            {
+                throw new InvalidOperationException("forbiden operation");
+            }
+
+            if (!this.isVerified)
+            {
+                throw new InvalidOperationException("forbiden operation");
+            }
+
+            if (this.isFreezed)
+            {
+                throw new InvalidOperationException("forbiden operation");
+            }
+
+            this.isFreezed = true;
+        }
+
+        public bool IsFreezed
+        {
+            get
+            {
+                return this.isFreezed;
+            }
         }
     }
 }

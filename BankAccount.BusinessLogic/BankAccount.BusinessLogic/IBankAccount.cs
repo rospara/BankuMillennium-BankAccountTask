@@ -7,5 +7,7 @@
         void Deposit(Currency currency, Money amount);
         Money GetBalance(Currency pln);
         void CloseAccount();
+        void FreezeAccount();
+        bool IsFreezed { get; }
     }
 }

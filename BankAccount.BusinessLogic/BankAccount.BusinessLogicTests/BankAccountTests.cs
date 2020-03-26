@@ -84,7 +84,6 @@ namespace BankAccount.BusinessLogic.Tests
             Assert.AreEqual(bankAccount.GetBalance(pln), new Money(0m, "PLN"));
         }
 
-        // Kiedy konto zostanie zamknięte wszystkie dalsze akcje na tym koncie są niedozwolone.
         [TestMethod]
         public void When_Account_Is_Closed_Any_Actions_Are_Forbidden_Test()
         {
@@ -121,6 +120,34 @@ namespace BankAccount.BusinessLogic.Tests
             }
 
             Assert.Fail();
+        }
+        [TestMethod]
+        public void Verified_Account_Can_Be_Freezed_Test()
+        {
+            IBank bank = new Bank();
+            Currency pln = new Currency("PLN");
+            var currencies = new List<Currency>();
+            currencies.Add(pln);
+            Guid userId = Guid.NewGuid();
+            IBankAccount bankAccount = bank.CreateBankAccount(userId, currencies);
+
+            bankAccount.Deposit(pln, new Money(1m, "PLN"));
+            bankAccount.Deposit(pln, new Money(200m, "PLN"));
+            bankAccount.Deposit(pln, new Money(300m, "PLN"));
+            bankAccount.Deposit(pln, new Money(500m, "PLN"));
+            bankAccount.VerifyAccount();
+            bankAccount.Deposit(pln, new Money(1000m, "PLN"));
+            bankAccount.Deposit(pln, new Money(2000m, "PLN"));
+            bankAccount.Withdraw(pln, new Money(100m, "PLN"));
+            bankAccount.Deposit(pln, new Money(3000m, "PLN"));
+            bankAccount.Withdraw(pln, new Money(100m, "PLN"));
+            bankAccount.Deposit(pln, new Money(5000m, "PLN"));
+            bankAccount.Withdraw(pln, new Money(100m, "PLN"));
+
+            bankAccount.FreezeAccount();
+            Assert.IsTrue(bankAccount.IsFreezed);
+            bankAccount.Withdraw(pln, new Money(100m, "PLN"));
+            Assert.IsFalse(bankAccount.IsFreezed);
         }
     }
 }
