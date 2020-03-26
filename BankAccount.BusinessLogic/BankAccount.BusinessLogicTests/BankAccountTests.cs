@@ -121,6 +121,7 @@ namespace BankAccount.BusinessLogic.Tests
 
             Assert.Fail();
         }
+
         [TestMethod]
         public void Verified_Account_Can_Be_Freezed_Test()
         {

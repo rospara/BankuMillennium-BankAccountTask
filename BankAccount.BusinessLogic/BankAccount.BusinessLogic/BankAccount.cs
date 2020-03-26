@@ -8,19 +8,24 @@ namespace BankAccount.BusinessLogic
 {
     public class BankAccount : IBankAccount
     {
-        private readonly Guid id = Guid.NewGuid();
+        private readonly Guid id;
         private Guid userId;
-        private bool isVerified = false;
+        private bool isVerified;
         /// <summary>
         /// @todo - consider currencyBalance as concurrent hash map 
         /// </summary>
-        private Dictionary<Currency, Money> currencyBalance = new Dictionary<Currency, Money>();
+        private Dictionary<Currency, Money> currencyBalance;
         private bool isClosed;
         private bool isFreezed;
 
         public BankAccount(Guid userId, IEnumerable<Currency> currencies)
         {
+            this.id= id = Guid.NewGuid();
             this.userId = userId;
+            this.isVerified = false;
+            this.currencyBalance = new Dictionary<Currency, Money>();
+            this.isClosed = false;
+            this.isFreezed = false;
 
             if (currencies != null && currencies.Any())
             {
@@ -51,9 +56,9 @@ namespace BankAccount.BusinessLogic
 
             this.currencyBalance[currency] -= amount;
 
-            if (!this.isFreezed)
+            if (this.isFreezed)
             {
-                this.isFreezed = true;
+                this.isFreezed = false;
             }
 
             return amount;
@@ -68,9 +73,9 @@ namespace BankAccount.BusinessLogic
 
             this.currencyBalance[currency] += amount;
 
-            if (!this.isFreezed)
+            if (this.isFreezed)
             {
-                this.isFreezed = true;
+                this.isFreezed = false;
             }
         }
 
