@@ -95,8 +95,7 @@ namespace BankAccount.BusinessLogic.Tests
             Guid userId = Guid.NewGuid();
             IBankAccount bankAccount = bank.CreateBankAccount(userId, currencies);
 
-            Money m0 = new Money(0m, "PLN");
-            bankAccount.Deposit(pln, );
+            bankAccount.Deposit(pln, new Money(1m, "PLN"));
             bankAccount.Deposit(pln, new Money(200m, "PLN"));
             bankAccount.Deposit(pln, new Money(300m, "PLN"));
             bankAccount.Deposit(pln, new Money(500m, "PLN"));
@@ -113,15 +112,15 @@ namespace BankAccount.BusinessLogic.Tests
 
             try
             {
-                
+                bankAccount.GetBalance(pln);
             }
             catch
             {
-                Assert.Fail();
+                Assert.IsTrue(true);
                 return;
             }
 
-            Assert.AreEqual(bankAccount.GetBalance(pln), new Money(0m, "PLN"));
+            Assert.Fail();
         }
     }
 }
