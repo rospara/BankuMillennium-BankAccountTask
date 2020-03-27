@@ -12,6 +12,10 @@ namespace BankAccount.BusinessLogic
         {
         }
 
+        internal VerifiedState(BankAccount bankAccount) : base(bankAccount)
+        {
+        }
+
         public override void BeforeVerify() 
         {
             throw new InvalidOperationException("account has been verified already");

@@ -7,6 +7,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.BusinessLogic",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.BusinessLogic.Tests", "BankAccount.BusinessLogicTests\BankAccount.BusinessLogic.Tests.csproj", "{2BBC0B05-C8AC-4E44-96BC-E5FA945C2746}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.Orchiestrators", "Orchiestrators\BankAccount.Orchiestrators.csproj", "{F395A9D0-00AB-4744-B1EE-07FDB3BF7E09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.DBModel", "BankAccount.DBModel\BankAccount.DBModel.csproj", "{4EDC4CC2-988B-4CDC-B471-5F759B7441EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.Repository", "BankAccount.Repository\BankAccount.Repository.csproj", "{094DB077-FB79-43BE-8212-0F71A90BDF17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount.DataTransferObjects", "BankAccount.DataTransferObjects\BankAccount.DataTransferObjects.csproj", "{26F9B0BF-CF56-4AE1-BC70-C58E5DCDC422}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccount", "BankAccount\BankAccount.csproj", "{571F817D-449D-40D8-BC96-4B9EFE97021B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +31,26 @@ Global
 		{2BBC0B05-C8AC-4E44-96BC-E5FA945C2746}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BBC0B05-C8AC-4E44-96BC-E5FA945C2746}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BBC0B05-C8AC-4E44-96BC-E5FA945C2746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F395A9D0-00AB-4744-B1EE-07FDB3BF7E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F395A9D0-00AB-4744-B1EE-07FDB3BF7E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F395A9D0-00AB-4744-B1EE-07FDB3BF7E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F395A9D0-00AB-4744-B1EE-07FDB3BF7E09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EDC4CC2-988B-4CDC-B471-5F759B7441EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EDC4CC2-988B-4CDC-B471-5F759B7441EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EDC4CC2-988B-4CDC-B471-5F759B7441EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EDC4CC2-988B-4CDC-B471-5F759B7441EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{094DB077-FB79-43BE-8212-0F71A90BDF17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{094DB077-FB79-43BE-8212-0F71A90BDF17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{094DB077-FB79-43BE-8212-0F71A90BDF17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{094DB077-FB79-43BE-8212-0F71A90BDF17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26F9B0BF-CF56-4AE1-BC70-C58E5DCDC422}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26F9B0BF-CF56-4AE1-BC70-C58E5DCDC422}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26F9B0BF-CF56-4AE1-BC70-C58E5DCDC422}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26F9B0BF-CF56-4AE1-BC70-C58E5DCDC422}.Release|Any CPU.Build.0 = Release|Any CPU
+		{571F817D-449D-40D8-BC96-4B9EFE97021B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{571F817D-449D-40D8-BC96-4B9EFE97021B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{571F817D-449D-40D8-BC96-4B9EFE97021B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{571F817D-449D-40D8-BC96-4B9EFE97021B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

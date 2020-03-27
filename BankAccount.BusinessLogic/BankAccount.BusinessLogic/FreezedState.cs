@@ -12,6 +12,10 @@ namespace BankAccount.BusinessLogic
         {
         }
 
+        internal FreezedState(BankAccount bankAccount) : base(bankAccount)
+        {
+        }
+
         public override void AfterDeposit()
         {
             bankAccount.State = new VerifiedState(this);

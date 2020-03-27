@@ -12,6 +12,10 @@ namespace BankAccount.BusinessLogic
         {
         }
 
+        internal NewState(BankAccount bankAccount) : base(bankAccount)
+        {
+        }
+
         public override void BeforeWithdraw()
         {
             throw new InvalidOperationException("account not verified");

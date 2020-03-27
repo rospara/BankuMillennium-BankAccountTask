@@ -12,6 +12,10 @@ namespace BankAccount.BusinessLogic
         {
         }
 
+        internal ClosedState(BankAccount bankAccount) : base(bankAccount)
+        {
+        }
+
         public override void BeforeDeposit()
         {
             throw new InvalidOperationException("forbiden operation");

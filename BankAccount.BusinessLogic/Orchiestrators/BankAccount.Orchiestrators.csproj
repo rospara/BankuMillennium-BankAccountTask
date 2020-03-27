@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F395A9D0-00AB-4744-B1EE-07FDB3BF7E09}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BankAccount.Orchiestrators</RootNamespace>
+    <AssemblyName>BankAccount.Orchiestrators</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IOrchiestrator.cs" />
+    <Compile Include="Orchiestrator.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BankAccount.BusinessLogic\BankAccount.BusinessLogic.csproj">
+      <Project>{ec3b1758-486d-45eb-a62c-c063ca94970b}</Project>
+      <Name>BankAccount.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BankAccount.DataTransferObjects\BankAccount.DataTransferObjects.csproj">
+      <Project>{26f9b0bf-cf56-4ae1-bc70-c58e5dcdc422}</Project>
+      <Name>BankAccount.DataTransferObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BankAccount.DBModel\BankAccount.DBModel.csproj">
+      <Project>{4edc4cc2-988b-4cdc-b471-5f759b7441ea}</Project>
+      <Name>BankAccount.DBModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BankAccount.Repository\BankAccount.Repository.csproj">
+      <Project>{094db077-fb79-43be-8212-0f71a90bdf17}</Project>
+      <Name>BankAccount.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
