@@ -8,7 +8,7 @@ namespace BankAccount.BusinessLogic
 {
     internal class VerifiedState : State
     {
-        public VerifiedState(State state) : base(state.BankAccount)
+        internal VerifiedState(State state) : base(state.BankAccount)
         {
         }
 

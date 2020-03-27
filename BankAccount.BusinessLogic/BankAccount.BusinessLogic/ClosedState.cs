@@ -8,7 +8,7 @@ namespace BankAccount.BusinessLogic
 {
     internal class ClosedState : State
     {
-        public ClosedState(State state) : base(state.BankAccount)
+        internal ClosedState(State state) : base(state.BankAccount)
         {
         }
 

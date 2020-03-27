@@ -8,7 +8,7 @@ namespace BankAccount.BusinessLogic
 {
     internal class FreezedState : State
     {
-        public FreezedState(State state) : base(state.BankAccount)
+        internal FreezedState(State state) : base(state.BankAccount)
         {
         }
 

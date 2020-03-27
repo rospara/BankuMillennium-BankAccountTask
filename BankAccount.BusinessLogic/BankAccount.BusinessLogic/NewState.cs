@@ -8,7 +8,7 @@ namespace BankAccount.BusinessLogic
 {
     internal class NewState : State
     {
-        public NewState(BankAccount bankAccount) : base(bankAccount)
+        internal NewState() 
         {
         }
 

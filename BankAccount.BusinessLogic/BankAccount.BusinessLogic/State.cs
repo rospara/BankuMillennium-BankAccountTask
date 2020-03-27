@@ -9,9 +9,12 @@ using System.Threading.Tasks;
 /// </summary>
 namespace BankAccount.BusinessLogic
 {
-    internal abstract class State
+    public abstract class State : IState
     {
-        internal State(BankAccount bankAccount) 
+        internal State()
+        {
+        }
+        internal State(BankAccount bankAccount)
         {
             this.bankAccount = bankAccount;
         }
@@ -27,16 +30,16 @@ namespace BankAccount.BusinessLogic
         {
         }
 
-        public virtual void BeforeDeposit() 
-        { 
+        public virtual void BeforeDeposit()
+        {
         }
 
-        public virtual void AfterDeposit() 
-        { 
+        public virtual void AfterDeposit()
+        {
         }
 
-        public virtual void BeforeWithdraw() 
-        { 
+        public virtual void BeforeWithdraw()
+        {
         }
 
         public virtual void AfterWithdraw()

@@ -11,15 +11,14 @@ namespace BankAccount.BusinessLogic
         private readonly Guid id;
         private Guid userId;
         private Dictionary<Currency, Money> currencyBalance;
-
-        private State state;
-        internal State State
+        private IState state;
+        internal IState State
         {
             get { return state; }
             set { state = value; }
         }
 
-        public BankAccount(Guid userId, IEnumerable<Currency> currencies)
+        public BankAccount(Guid userId, IEnumerable<Currency> currencies, IState state)
         {
             this.id = Guid.NewGuid();
             this.userId = userId;
@@ -32,7 +31,8 @@ namespace BankAccount.BusinessLogic
                 }
             }
 
-            this.state = new NewState(this);
+            state.BankAccount = this;
+            this.state = state;
         }
 
         public void Deposit(Currency currency, Money amount)

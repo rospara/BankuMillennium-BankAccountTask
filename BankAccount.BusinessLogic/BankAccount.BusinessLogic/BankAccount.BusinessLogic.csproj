@@ -48,6 +48,7 @@
     <Compile Include="FreezedState.cs" />
     <Compile Include="IBank.cs" />
     <Compile Include="IBankAccount.cs" />
+    <Compile Include="IState.cs" />
     <Compile Include="Money.cs" />
     <Compile Include="NewState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
