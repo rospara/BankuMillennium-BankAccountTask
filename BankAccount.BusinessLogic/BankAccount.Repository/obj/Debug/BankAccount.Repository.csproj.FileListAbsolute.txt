@@ -1,8 +1,0 @@
-C:\Users\robert.ospara\source\repos\rospara\BankuMillennium-BankAccountTask\BankAccount.BusinessLogic\BankAccount.Repository\bin\Debug\BankAccount.Repository.dll
-C:\Users\robert.ospara\source\repos\rospara\BankuMillennium-BankAccountTask\BankAccount.BusinessLogic\BankAccount.Repository\bin\Debug\BankAccount.Repository.pdb
-C:\Users\robert.ospara\source\repos\rospara\BankuMillennium-BankAccountTask\BankAccount.BusinessLogic\BankAccount.Repository\bin\Debug\BankAccount.DBModel.dll
-C:\Users\robert.ospara\source\repos\rospara\BankuMillennium-BankAccountTask\BankAccount.BusinessLogic\BankAccount.Repository\bin\Debug\BankAccount.DBModel.pdb
-C:\Users\robert.ospara\source\repos\rospara\BankuMillennium-BankAccountTask\BankAccount.BusinessLogic\BankAccount.Repository\obj\Debug\BankAccount.Repository.csprojAssemblyReference.cache
-C:\Users\robert.ospara\source\repos\rospara\BankuMillennium-BankAccountTask\BankAccount.BusinessLogic\BankAccount.Repository\obj\Debug\BankAccount.Repository.csproj.CopyComplete
-C:\Users\robert.ospara\source\repos\rospara\BankuMillennium-BankAccountTask\BankAccount.BusinessLogic\BankAccount.Repository\obj\Debug\BankAccount.Repository.dll
-C:\Users\robert.ospara\source\repos\rospara\BankuMillennium-BankAccountTask\BankAccount.BusinessLogic\BankAccount.Repository\obj\Debug\BankAccount.Repository.pdb

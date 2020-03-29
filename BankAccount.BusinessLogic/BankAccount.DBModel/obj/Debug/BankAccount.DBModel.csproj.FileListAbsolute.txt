@@ -1,4 +1,0 @@
-C:\Users\robert.ospara\source\repos\rospara\BankuMillennium-BankAccountTask\BankAccount.BusinessLogic\BankAccount.DBModel\bin\Debug\BankAccount.DBModel.dll
-C:\Users\robert.ospara\source\repos\rospara\BankuMillennium-BankAccountTask\BankAccount.BusinessLogic\BankAccount.DBModel\bin\Debug\BankAccount.DBModel.pdb
-C:\Users\robert.ospara\source\repos\rospara\BankuMillennium-BankAccountTask\BankAccount.BusinessLogic\BankAccount.DBModel\obj\Debug\BankAccount.DBModel.dll
-C:\Users\robert.ospara\source\repos\rospara\BankuMillennium-BankAccountTask\BankAccount.BusinessLogic\BankAccount.DBModel\obj\Debug\BankAccount.DBModel.pdb
