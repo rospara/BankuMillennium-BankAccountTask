@@ -1,10 +1,13 @@
-﻿using System;
-using DTO = BankAccount.DataTransferObjects;
+﻿using BankAccount.ApiParameters;
+using BankAccount.DataTransferObjects;
+using System;
 
 namespace Orchiestrators
 {
     public interface IOrchiestrator
     {
-        DTO.BankAccountHeader GetBankAccountHeader(Guid accountId);
+        BankAccountHeaderDto GetBankAccountHeader(Guid accountId);
+        void Deposite(Guid guid, MoneyParams amount);
+        MoneyDto Withdraw(Guid accountId, MoneyParams amount);
     }
 }

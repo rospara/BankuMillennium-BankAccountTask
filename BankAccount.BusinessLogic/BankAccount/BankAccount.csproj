@@ -247,6 +247,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BankAccount.ApiParameters\BankAccount.ApiParameters.csproj">
+      <Project>{DBC93A43-5F40-4B42-8E41-A9497CC7892D}</Project>
+      <Name>BankAccount.ApiParameters</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BankAccount.DataTransferObjects\BankAccount.DataTransferObjects.csproj">
       <Project>{26F9B0BF-CF56-4AE1-BC70-C58E5DCDC422}</Project>
       <Name>BankAccount.DataTransferObjects</Name>

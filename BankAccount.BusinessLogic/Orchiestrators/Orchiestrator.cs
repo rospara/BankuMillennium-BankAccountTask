@@ -8,9 +8,18 @@ using DB = BankAccount.DBModel;
 using BL = BankAccount.BusinessLogic;
 using DTO = BankAccount.DataTransferObjects;
 using BankAccount.BusinessLogic;
+using BankAccount.ApiParameters;
+using BankAccount.DataTransferObjects;
 
 namespace Orchiestrators
 {
+    /// <summary>
+    /// Orchiestrator aranges all request handling between layers: retrieves data from db, receives parameters from
+    /// controller, loads buisness logic entites and run buisness logic, returning some results optionally.
+    /// So main responsibility is:
+    /// 1. mapping between layers
+    /// 2. runing business logic
+    /// </summary>
     public class Orchiestrator : IOrchiestrator
     {
         private readonly IRepository repository;
@@ -20,31 +29,31 @@ namespace Orchiestrators
             this.repository = new Repository();
         }
 
-        public DTO.BankAccountHeader GetBankAccountHeader(Guid accountId)
+        public DTO.BankAccountHeaderDto GetBankAccountHeader(Guid accountId)
         {
             // get data from db
-            DB.BankAccount EFBankAccount = this.repository.GetBankAccount(accountId);
+            DB.BankAccount dbBankAccount = this.repository.GetBankAccount(accountId);
 
             var currencyBalance = new Dictionary<Currency, Money>();
-            foreach (var cb in EFBankAccount.CurrencyBalance)
+            foreach (var cb in dbBankAccount.CurrencyBalance)
             {
                 var currency = new BL.Currency(cb.Key);
                 currencyBalance.Add(currency, new Money(cb.Value, currency));
             }
 
             // apply business logic
-            BL.BankAccount BLBankAccount = new BL.BankAccount(
-                EFBankAccount.Id,
-                EFBankAccount.UserId,
+            BL.BankAccount blBankAccount = new BL.BankAccount(
+                dbBankAccount.Id,
+                dbBankAccount.UserId,
                 currencyBalance,
-                MapDBStatusBLStatus(EFBankAccount.State));
+                MapDBStatusBLStatus(dbBankAccount.State));
 
             // map business logic entity to dto
-            DTO.BankAccountHeader DTOBankAccountHeader = new DTO.BankAccountHeader();
-            DTOBankAccountHeader.Status = BLBankAccount.GetStatus();
-            DTOBankAccountHeader.PLNBalance = BLBankAccount.GetBalance("PLN").Amount;
-            DTOBankAccountHeader.AccountNumber = BLBankAccount.GetAccountNumber().ToString();
-            return DTOBankAccountHeader;
+            BankAccountHeaderDto bankAccountHeaderDto = new BankAccountHeaderDto();
+            bankAccountHeaderDto.Status = blBankAccount.GetStatus();
+            bankAccountHeaderDto.PLNBalance = blBankAccount.GetBalance("PLN").Amount;
+            bankAccountHeaderDto.AccountNumber = blBankAccount.GetAccountNumber().ToString();
+            return bankAccountHeaderDto;
         }
 
         private IState MapDBStatusBLStatus(int statusId)
@@ -71,7 +80,13 @@ namespace Orchiestrators
             }
         }
 
-        void Deposit() { }
-        void Withdraw() { }
+        public void Deposite(Guid accountId, MoneyParams amount)
+        {
+
+        }
+        public MoneyDto Withdraw(Guid accountId, MoneyParams amount) 
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankAccount.DataTransferObjects
 {
-    public class BankAccountHeader
+    public class BankAccountHeaderDto
     {
         public string Status { get; set; }
         public decimal PLNBalance { get; set; }

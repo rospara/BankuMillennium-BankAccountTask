@@ -1,4 +1,5 @@
-﻿using BankAccount.DataTransferObjects;
+﻿using BankAccount.ApiParameters;
+using BankAccount.DataTransferObjects;
 using Orchiestrators;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace BankAccount.Controllers
         }
 
         // GET api/values/5
-        public BankAccountHeader GetBankAccountHeader(Guid accountId)
+        public BankAccountHeaderDto GetBankAccountHeader(Guid accountId)
         {
             var bankAccountHeader = this.orchiestrator.GetBankAccountHeader(accountId);
             return bankAccountHeader;
@@ -30,14 +31,16 @@ namespace BankAccount.Controllers
         {
         }
 
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
         // DELETE api/values/5
         public void Delete(int id)
         {
+        }
+
+        // PUT api/values/5
+        public IHttpActionResult Deposite(Guid guid, MoneyParams amount)
+        {
+            this.orchiestrator.Deposite(guid, amount);
+            return Ok();
         }
     }
 }

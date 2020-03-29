@@ -72,6 +72,10 @@
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BankAccount.ApiParameters\BankAccount.ApiParameters.csproj">
+      <Project>{DBC93A43-5F40-4B42-8E41-A9497CC7892D}</Project>
+      <Name>BankAccount.ApiParameters</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BankAccount.BusinessLogic\BankAccount.BusinessLogic.csproj">
       <Project>{EC3B1758-486D-45EB-A62C-C063CA94970B}</Project>
       <Name>BankAccount.BusinessLogic</Name>
@@ -84,6 +88,9 @@
       <Project>{571f817d-449d-40d8-bc96-4b9efe97021b}</Project>
       <Name>BankAccount</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BankAccount\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
