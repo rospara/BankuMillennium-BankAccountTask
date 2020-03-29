@@ -48,7 +48,7 @@ namespace Orchiestrators
             return bankAccountHeaderDto;
         }
 
-        public void Deposite(Guid accountId, MoneyUpdate amountUpdate)
+        public BankAccountHeaderDto Deposite(Guid accountId, MoneyUpdate amountUpdate)
         {
             // get data from db
             DB.BankAccount dbBankAccount = this.AssertBankAccount(accountId);
@@ -62,9 +62,12 @@ namespace Orchiestrators
             BL.BankAccount blBankAccount = LoadBankAccount(dbBankAccount.Id, dbBankAccount.UserId, blCurrencyBalance, blState);
             Money amount = new Money(amountUpdate.Amount, new Currency(amountUpdate.CurrencyISOCode));
             blBankAccount.Deposit(amount);
+
+            BankAccountHeaderDto bankAccountHeaderDto = MapBankAccount(blBankAccount);
+            return bankAccountHeaderDto;
         }
 
-        public MoneyDto Withdraw(Guid accountId, MoneyParams moneyParams)
+        public BankAccountHeaderDto Withdraw(Guid accountId, MoneyParams moneyParams)
         {
             // get data from db
             DB.BankAccount dbBankAccount = this.AssertBankAccount(accountId);
@@ -78,16 +81,15 @@ namespace Orchiestrators
             BL.BankAccount blBankAccount = LoadBankAccount(dbBankAccount.Id, dbBankAccount.UserId, blCurrencyBalance, blState);
             Money amount = new Money(moneyParams.Amount, new Currency(moneyParams.CurrencyISOCode));
             var money = blBankAccount.Withdraw(amount);
-            MoneyDto moneyDto = MapMoney(money);
-
-            return moneyDto;
+            BankAccountHeaderDto bankAccountHeaderDto = MapBankAccount(blBankAccount);
+            return bankAccountHeaderDto;
         }
 
         private static MoneyDto MapMoney(Money money)
         {
             MoneyDto moneyDto = new MoneyDto();
             moneyDto.Amount = money.Amount;
-            moneyDto.Currency = money.Currency.ToString();
+            moneyDto.CurrencyISOCode = money.Currency.IsoCode;
             return moneyDto;
         }
 
@@ -100,17 +102,25 @@ namespace Orchiestrators
             {
                 currencyBalanceDto.Add(MapMoney(cb.Value));
             }
-            bankAccountHeaderDto.CurrencyBalance = currencyBalanceDto;
+            bankAccountHeaderDto.Balances = currencyBalanceDto;
             bankAccountHeaderDto.AccountNumber = blBankAccount.GetAccountNumber().ToString();
             return bankAccountHeaderDto;
         }
 
-        private static BL.BankAccount LoadBankAccount(Guid id, Guid userId, Dictionary<Currency, Money> blCurrencyBalance, IState blState)
+        private static BL.BankAccount LoadBankAccount(Guid id, Guid userId, IDictionary<Currency, Money> blCurrencyBalance, IState blState)
         {
             return new BL.BankAccount(
                 id,
                 userId,
                 blCurrencyBalance,
+                blState);
+        }
+
+        private static BL.BankAccount LoadBankAccount(Guid id, Guid userId, IState blState)
+        {
+            return new BL.BankAccount(
+                id,
+                userId,
                 blState);
         }
 

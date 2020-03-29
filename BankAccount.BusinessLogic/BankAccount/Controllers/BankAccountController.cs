@@ -10,6 +10,7 @@ using System.Web.Http;
 
 namespace BankAccount.Controllers
 {
+    [RoutePrefix("api/bank-account")]
     public class BankAccountController : ApiController
     {
         private readonly IOrchiestrator orchiestrator;
@@ -19,27 +20,25 @@ namespace BankAccount.Controllers
             this.orchiestrator = new Orchiestrator();
         }
 
-        // GET api/values/5
+        [HttpGet, Route("{accountId:Guid}")]
         public BankAccountHeaderDto GetBankAccountHeader(Guid accountId)
         {
             var bankAccountHeader = this.orchiestrator.GetBankAccountHeader(accountId);
             return bankAccountHeader;
         }
 
-        [HttpPut]
-        // PUT api/values/5
-        public IHttpActionResult Deposite(Guid guid, MoneyUpdate amount)
+        [HttpPut, Route("deposite/{id:Guid}")]
+        public BankAccountHeaderDto Deposite(Guid id, [FromBody]MoneyUpdate amount)
         {
-            this.orchiestrator.Deposite(guid, amount);
-            return Ok();
+            var bankAccountHeader = this.orchiestrator.Deposite(id, amount);
+            return bankAccountHeader;
         }
 
-        [HttpPut]
-        // PUT api/values/5
-        public MoneyDto Withdraw(Guid guid, MoneyParams amount)
+        [HttpPut, Route("withdraw/{id:Guid}")]
+        public BankAccountHeaderDto Withdraw(Guid id, [FromBody]MoneyParams amount)
         {
-            var moneyDto = this.orchiestrator.Withdraw(guid, amount);
-            return moneyDto;
+            var bankAccountHeader = this.orchiestrator.Withdraw(id, amount);
+            return bankAccountHeader;
         }
     }
 }

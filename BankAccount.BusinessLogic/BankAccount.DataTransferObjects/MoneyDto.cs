@@ -8,7 +8,7 @@ namespace BankAccount.DataTransferObjects
 {
     public class MoneyDto
     {
-        public string Currency { get; set; }
+        public string CurrencyISOCode { get; set; }
         public decimal Amount { get; set; }
     }
 }

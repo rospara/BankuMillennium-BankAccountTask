@@ -7,6 +7,6 @@ namespace BankAccount.DataTransferObjects
         public string Status { get; set; }
         public string AccountNumber { get; set; }
 
-        public IEnumerable<MoneyDto> CurrencyBalance { get; set; }
+        public IEnumerable<MoneyDto> Balances { get; set; }
     }
 }

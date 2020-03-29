@@ -37,13 +37,24 @@ namespace BankAccount.BusinessLogic
             var status = this.state.GetType().ToString();
             return RemoveNamespaces(status);
         }
-
-        public BankAccount(Guid id, Guid userId, Dictionary<Currency, Money> currencyBalance, IState state)
+        public BankAccount(Guid id, Guid userId, IState state)
         {
             this.id = id;
             this.userId = userId;
             this.currencyBalance = new Dictionary<Currency, Money>();
-            this.currencyBalance = currencyBalance;
+            state.BankAccount = this;
+            this.state = state;
+        }
+
+        public BankAccount(Guid id, Guid userId, IDictionary<Currency, Money> currencyBalance, IState state)
+        {
+            this.id = id;
+            this.userId = userId;
+            this.currencyBalance = new Dictionary<Currency, Money>();
+            foreach (var cb in currencyBalance)
+            {
+                this.currencyBalance.Add(cb.Key, cb.Value);
+            }
             state.BankAccount = this;
             this.state = state;
         }

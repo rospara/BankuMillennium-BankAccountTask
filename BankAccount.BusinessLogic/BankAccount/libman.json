@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "angular-ui-bootstrap@2.5.0",
+      "destination": "Scripts/angular-ui-bootstrap/"
+    },
+    {
+      "library": "angular.js@1.7.9",
+      "destination": "Scripts/angular.js/",
+      "files": [
+        "angular.min.js"
+      ]
+    }
+  ]
+}
