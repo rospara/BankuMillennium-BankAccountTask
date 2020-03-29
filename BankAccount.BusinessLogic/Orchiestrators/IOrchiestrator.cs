@@ -7,7 +7,7 @@ namespace Orchiestrators
     public interface IOrchiestrator
     {
         BankAccountHeaderDto GetBankAccountHeader(Guid accountId);
-        void Deposite(Guid guid, MoneyParams amount);
+        void Deposite(Guid guid, MoneyUpdate amount);
         MoneyDto Withdraw(Guid accountId, MoneyParams amount);
     }
 }

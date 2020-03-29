@@ -6,6 +6,12 @@ using System.Threading.Tasks;
 
 namespace BankAccount.ApiParameters
 {
+    public class MoneyUpdate : MoneyParams
+    {
+        public MoneyUpdate(string currencyISOCode, decimal amount) : base(currencyISOCode, amount)
+        { }
+    }
+
     public class MoneyParams
     {
         private string currencyISOCode;
@@ -13,8 +19,11 @@ namespace BankAccount.ApiParameters
 
         public MoneyParams(string currencyISOCode, decimal amount)
         {
-            this.currencyISOCode = currencyISOCode;
-            this.amount = amount;
+            this.CurrencyISOCode = currencyISOCode;
+            this.Amount = amount;
         }
+
+        public string CurrencyISOCode { get => currencyISOCode; set => currencyISOCode = value; }
+        public decimal Amount { get => amount; set => amount = value; }
     }
 }

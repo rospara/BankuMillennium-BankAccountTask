@@ -26,21 +26,20 @@ namespace BankAccount.Controllers
             return bankAccountHeader;
         }
 
-        // POST api/values
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        public void Delete(int id)
-        {
-        }
-
+        [HttpPut]
         // PUT api/values/5
-        public IHttpActionResult Deposite(Guid guid, MoneyParams amount)
+        public IHttpActionResult Deposite(Guid guid, MoneyUpdate amount)
         {
             this.orchiestrator.Deposite(guid, amount);
             return Ok();
+        }
+
+        [HttpPut]
+        // PUT api/values/5
+        public MoneyDto Withdraw(Guid guid, MoneyParams amount)
+        {
+            var moneyDto = this.orchiestrator.Withdraw(guid, amount);
+            return moneyDto;
         }
     }
 }

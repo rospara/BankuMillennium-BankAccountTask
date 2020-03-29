@@ -32,8 +32,91 @@ namespace Orchiestrators
         public DTO.BankAccountHeaderDto GetBankAccountHeader(Guid accountId)
         {
             // get data from db
-            DB.BankAccount dbBankAccount = this.repository.GetBankAccount(accountId);
+            DB.BankAccount dbBankAccount = this.AssertBankAccount(accountId);
 
+            // map db entities to bl entities
+            // offcourse automapper can be used
+            Dictionary<Currency, Money> blCurrencyBalance = MapCurrencyBalance(dbBankAccount);
+            IState blState = MapState(dbBankAccount.State);
+
+            // apply business logic
+            BL.BankAccount blBankAccount = LoadBankAccount(dbBankAccount.Id, dbBankAccount.UserId, blCurrencyBalance, blState);
+
+            // map business logic entity to dto
+            // offcourse automapper can be used
+            BankAccountHeaderDto bankAccountHeaderDto = MapBankAccount(blBankAccount);
+            return bankAccountHeaderDto;
+        }
+
+        public void Deposite(Guid accountId, MoneyUpdate amountUpdate)
+        {
+            // get data from db
+            DB.BankAccount dbBankAccount = this.AssertBankAccount(accountId);
+
+            // map db entities to bl entities
+            // offcourse automapper can be used
+            Dictionary<Currency, Money> blCurrencyBalance = MapCurrencyBalance(dbBankAccount);
+            IState blState = MapState(dbBankAccount.State);
+
+            // apply business logic
+            BL.BankAccount blBankAccount = LoadBankAccount(dbBankAccount.Id, dbBankAccount.UserId, blCurrencyBalance, blState);
+            Money amount = new Money(amountUpdate.Amount, new Currency(amountUpdate.CurrencyISOCode));
+            blBankAccount.Deposit(amount);
+        }
+
+        public MoneyDto Withdraw(Guid accountId, MoneyParams moneyParams)
+        {
+            // get data from db
+            DB.BankAccount dbBankAccount = this.AssertBankAccount(accountId);
+
+            // map db entities to bl entities
+            // offcourse automapper can be used
+            Dictionary<Currency, Money> blCurrencyBalance = MapCurrencyBalance(dbBankAccount);
+            IState blState = MapState(dbBankAccount.State);
+
+            // apply business logic
+            BL.BankAccount blBankAccount = LoadBankAccount(dbBankAccount.Id, dbBankAccount.UserId, blCurrencyBalance, blState);
+            Money amount = new Money(moneyParams.Amount, new Currency(moneyParams.CurrencyISOCode));
+            var money = blBankAccount.Withdraw(amount);
+            MoneyDto moneyDto = MapMoney(money);
+
+            return moneyDto;
+        }
+
+        private static MoneyDto MapMoney(Money money)
+        {
+            MoneyDto moneyDto = new MoneyDto();
+            moneyDto.Amount = money.Amount;
+            moneyDto.Currency = money.Currency.ToString();
+            return moneyDto;
+        }
+
+        private static BankAccountHeaderDto MapBankAccount(BL.BankAccount blBankAccount)
+        {          
+            BankAccountHeaderDto bankAccountHeaderDto = new BankAccountHeaderDto();
+            bankAccountHeaderDto.Status = blBankAccount.GetStatus();
+            var currencyBalanceDto = new List<MoneyDto>();
+            foreach (var cb in blBankAccount.CurrencyBalance)
+            {
+                currencyBalanceDto.Add(MapMoney(cb.Value));
+            }
+            bankAccountHeaderDto.CurrencyBalance = currencyBalanceDto;
+            bankAccountHeaderDto.AccountNumber = blBankAccount.GetAccountNumber().ToString();
+            return bankAccountHeaderDto;
+        }
+
+        private static BL.BankAccount LoadBankAccount(Guid id, Guid userId, Dictionary<Currency, Money> blCurrencyBalance, IState blState)
+        {
+            return new BL.BankAccount(
+                id,
+                userId,
+                blCurrencyBalance,
+                blState);
+        }
+
+        private static Dictionary<Currency, Money> MapCurrencyBalance(DB.BankAccount dbBankAccount)
+        {
+            // map db entities to bl entities
             var currencyBalance = new Dictionary<Currency, Money>();
             foreach (var cb in dbBankAccount.CurrencyBalance)
             {
@@ -41,22 +124,17 @@ namespace Orchiestrators
                 currencyBalance.Add(currency, new Money(cb.Value, currency));
             }
 
-            // apply business logic
-            BL.BankAccount blBankAccount = new BL.BankAccount(
-                dbBankAccount.Id,
-                dbBankAccount.UserId,
-                currencyBalance,
-                MapDBStatusBLStatus(dbBankAccount.State));
-
-            // map business logic entity to dto
-            BankAccountHeaderDto bankAccountHeaderDto = new BankAccountHeaderDto();
-            bankAccountHeaderDto.Status = blBankAccount.GetStatus();
-            bankAccountHeaderDto.PLNBalance = blBankAccount.GetBalance("PLN").Amount;
-            bankAccountHeaderDto.AccountNumber = blBankAccount.GetAccountNumber().ToString();
-            return bankAccountHeaderDto;
+            return currencyBalance;
         }
 
-        private IState MapDBStatusBLStatus(int statusId)
+        private DB.BankAccount AssertBankAccount(Guid accountId)
+        {
+            var bankAccount = this.repository.GetBankAccount(accountId);
+            ObjectRetrievalFailureException.ThrowIfNull(bankAccount, accountId);
+            return bankAccount;
+        }
+
+        private IState MapState(int statusId)
         {
             switch (statusId)
             {
@@ -78,15 +156,6 @@ namespace Orchiestrators
                     }
                 default: throw new Exception("status unknow");
             }
-        }
-
-        public void Deposite(Guid accountId, MoneyParams amount)
-        {
-
-        }
-        public MoneyDto Withdraw(Guid accountId, MoneyParams amount) 
-        {
-            throw new NotImplementedException();
         }
     }
 }

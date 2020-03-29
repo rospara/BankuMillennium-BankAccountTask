@@ -72,6 +72,7 @@ namespace BankAccount.BusinessLogic
             this.state.AfterDeposit();
         }
 
+        //@todo - to remove
         public Money Withdraw(Currency currency, Money amount)
         {
             this.state.BeforeWithdraw();
@@ -86,6 +87,29 @@ namespace BankAccount.BusinessLogic
             this.state.AfterWithdraw();
 
             return amount;
+        }
+
+        public Money Withdraw(Money money)
+        {
+            this.state.BeforeWithdraw();
+
+            var amountAfterWithdraw = this.currencyBalance[money.Currency] - money.Amount;
+            if (amountAfterWithdraw.Amount < 0m)
+            {
+                throw new ArgumentException("insufficient funds");
+            }
+            this.currencyBalance[money.Currency] -= money;
+
+            this.state.AfterWithdraw();
+
+            return money;
+        }
+
+        public void Deposit(Money money)
+        {
+            this.state.BeforeDeposit();
+            this.currencyBalance[money.Currency] += money.Amount;
+            this.state.AfterDeposit();
         }
 
         public Money GetBalance(Currency pln)
