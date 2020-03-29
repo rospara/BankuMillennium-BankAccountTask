@@ -11,9 +11,9 @@ namespace BankAccount.BusinessLogic
         private readonly Guid id = Guid.NewGuid();
         private IList<IBankAccount> bankAccounts = new List<IBankAccount>();
 
-        public IBankAccount CreateBankAccount(Guid userId, IEnumerable<Currency> currencies)
+        public IBankAccount CreateBankAccount(Guid id, Guid userId, IEnumerable<Currency> currencies)
         {
-            var bankAccount = new BankAccount(userId, currencies, new NewState());
+            var bankAccount = new BankAccount(id, userId, currencies, new NewState());
             bankAccounts.Add(bankAccount);
             return bankAccount;
         }

@@ -15,3 +15,8 @@
 /BankAccount.BusinessLogic/.vs/BankAccount.BusinessLogic/config/applicationhost.config
 /BankAccount.BusinessLogic/BankAccount/bin
 /BankAccount.BusinessLogic/BankAccount/obj/Debug
+/BankAccount.BusinessLogic/packages/Newtonsoft.Json.6.0.4
+*.exe
+*.cache
+*.lib
+

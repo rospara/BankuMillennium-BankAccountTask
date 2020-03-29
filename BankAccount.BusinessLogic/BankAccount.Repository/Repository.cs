@@ -9,10 +9,11 @@ namespace BankAccount.Repository
 {
     public class Repository : IRepository
     {
-        public DB.BankAccount GetBankAccount(Guid accountId, Guid userId)
+        public DB.BankAccount GetBankAccount(Guid accountId)
         {
             var balance = new Dictionary<string, decimal>();
-            balance.Add("PLN", 100m);
+            balance.Add("PLN", 1000m);
+            var userId = Guid.Parse("4939209E-8CAA-4722-AC0D-31A1B15462DD");
             return new DB.BankAccount(accountId, userId, balance, 1);
         }
     }

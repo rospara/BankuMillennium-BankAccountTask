@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace BankAccount.BusinessLogic
 {
-    internal class FreezedState : State
+    public class FreezedState : State
     {
+        public FreezedState()
+        {
+        }
+
         internal FreezedState(State state) : base(state.BankAccount)
         {
         }

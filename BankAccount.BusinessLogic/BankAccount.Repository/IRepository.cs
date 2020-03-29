@@ -9,6 +9,6 @@ namespace BankAccount.Repository
 {
     public interface IRepository
     {
-        DB.BankAccount GetBankAccount(Guid accountId, Guid userId);
+        DB.BankAccount GetBankAccount(Guid accountId);
     }
 }

@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace BankAccount.BusinessLogic
 {
-    internal class VerifiedState : State
+    public class VerifiedState : State
     {
+        public VerifiedState()
+        {
+        }
+
         internal VerifiedState(State state) : base(state.BankAccount)
         {
         }

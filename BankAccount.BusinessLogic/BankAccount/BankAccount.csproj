@@ -246,6 +246,16 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BankAccount.DataTransferObjects\BankAccount.DataTransferObjects.csproj">
+      <Project>{26F9B0BF-CF56-4AE1-BC70-C58E5DCDC422}</Project>
+      <Name>BankAccount.DataTransferObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Orchiestrators\BankAccount.Orchiestrators.csproj">
+      <Project>{F395A9D0-00AB-4744-B1EE-07FDB3BF7E09}</Project>
+      <Name>BankAccount.Orchiestrators</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

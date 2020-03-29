@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BankAccount.BusinessLogic
@@ -9,35 +10,13 @@ namespace BankAccount.BusinessLogic
     public class BankAccount : IBankAccount
     {
         private readonly Guid id;
-        private Guid userId;
+        private readonly Guid userId;
         private Dictionary<Currency, Money> currencyBalance;
         private IState state;
-        internal IState State
+        public IState State
         {
             get { return state; }
-            set { state = value; }
-        }
-        private Dictionary<int, IState> indexOfStates;
-        
-        public BankAccount(Guid id, Guid userId, IEnumerable<Currency> currencies, int stateId)
-        {
-            this.id = id;
-            this.userId = userId;
-            this.currencyBalance = new Dictionary<Currency, Money>();
-            if (currencies != null && currencies.Any())
-            {
-                foreach (var currency in currencies)
-                {
-                    this.currencyBalance.Add(currency, new Money(0m, currency));
-                }
-            }
-
-            this.indexOfStates.Add(0, new NewState(this));
-            this.indexOfStates.Add(1, new VerifiedState(this));
-            this.indexOfStates.Add(2, new FreezedState(this));
-            this.indexOfStates.Add(3, new ClosedState(this));
-        
-            this.state = indexOfStates[stateId];
+            internal set { state = value; }
         }
 
         public Guid GetAccountNumber()
@@ -45,14 +24,33 @@ namespace BankAccount.BusinessLogic
             return this.id;
         }
 
-        public string GetStatus()
+        public static string RemoveNamespaces(string typename)
         {
-            return this.state.GetType().ToString();
+            return string.Join("",
+                  Regex.Split(typename,
+                             @"([^\w\.])").Select(p =>
+                                             p.Substring(p.LastIndexOf('.') + 1)));
         }
 
-        public BankAccount(Guid userId, IEnumerable<Currency> currencies, IState state)
+        public string GetStatus()
         {
-            this.id = Guid.NewGuid();
+            var status = this.state.GetType().ToString();
+            return RemoveNamespaces(status);
+        }
+
+        public BankAccount(Guid id, Guid userId, Dictionary<Currency, Money> currencyBalance, IState state)
+        {
+            this.id = id;
+            this.userId = userId;
+            this.currencyBalance = new Dictionary<Currency, Money>();
+            this.currencyBalance = currencyBalance;
+            state.BankAccount = this;
+            this.state = state;
+        }
+
+        public BankAccount(Guid id, Guid userId, IEnumerable<Currency> currencies, IState state)
+        {
+            this.id = id;
             this.userId = userId;
             this.currencyBalance = new Dictionary<Currency, Money>();
             if (currencies != null && currencies.Any())
@@ -119,12 +117,18 @@ namespace BankAccount.BusinessLogic
             this.state.BeforeFreeze();
         }
 
-        public bool IsFreezed 
-        { 
+        public bool IsFreezed
+        {
             get
             {
                 return this.state.GetType() == typeof(FreezedState);
             }
         }
+
+        public Guid Id => id;
+
+        public Guid UserId => userId;
+
+        public Dictionary<Currency, Money> CurrencyBalance { get => currencyBalance; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BankAccount.DataTransferObjects;
+using Orchiestrators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,16 +11,18 @@ namespace BankAccount.Controllers
 {
     public class BankAccountController : ApiController
     {
-        // GET api/values
-        public IEnumerable<string> Get()
+        private readonly IOrchiestrator orchiestrator;
+
+        public BankAccountController()
         {
-            return new string[] { "value1", "value2" };
+            this.orchiestrator = new Orchiestrator();
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public BankAccountHeader GetBankAccountHeader(Guid accountId)
         {
-            return "value";
+            var bankAccountHeader = this.orchiestrator.GetBankAccountHeader(accountId);
+            return bankAccountHeader;
         }
 
         // POST api/values

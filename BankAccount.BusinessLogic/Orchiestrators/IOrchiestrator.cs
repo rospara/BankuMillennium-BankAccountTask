@@ -5,6 +5,6 @@ namespace Orchiestrators
 {
     public interface IOrchiestrator
     {
-        DTO.BankAccountHeader GetBankAccountHeader(Guid accountId, Guid userId)
+        DTO.BankAccountHeader GetBankAccountHeader(Guid accountId);
     }
 }

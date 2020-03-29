@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BankAccount.BusinessLogic
 {
-    internal class NewState : State
+    public class NewState : State
     {
-        internal NewState() 
+        public NewState() 
         {
         }
 

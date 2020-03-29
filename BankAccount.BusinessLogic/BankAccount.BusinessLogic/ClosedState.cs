@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace BankAccount.BusinessLogic
 {
-    internal class ClosedState : State
+    public class ClosedState : State
     {
+        public ClosedState()
+        {
+        }
+
         internal ClosedState(State state) : base(state.BankAccount)
         {
         }

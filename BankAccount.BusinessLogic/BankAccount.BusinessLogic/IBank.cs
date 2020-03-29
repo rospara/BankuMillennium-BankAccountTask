@@ -5,6 +5,6 @@ namespace BankAccount.BusinessLogic
 {
     public interface IBank
     {
-        IBankAccount CreateBankAccount(Guid userId, IEnumerable<Currency> currencies);
+        IBankAccount CreateBankAccount(Guid id, Guid userId, IEnumerable<Currency> currencies);
     }
 }

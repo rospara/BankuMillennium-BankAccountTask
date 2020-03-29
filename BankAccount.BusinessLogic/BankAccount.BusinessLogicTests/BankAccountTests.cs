@@ -8,9 +8,6 @@ namespace BankAccount.BusinessLogic.Tests
     [TestClass]
     public class BankAccountTests
     {
-        // 1. add async code 
-        // 2. use parallel processing where possible
-        // 3. use locks and thread safe techniques 
         [TestMethod]
         public void Money_Can_Be_Deposited_To_BankAccount_Any_Time()
         {
@@ -18,8 +15,9 @@ namespace BankAccount.BusinessLogic.Tests
             Currency pln = new Currency("PLN");
             var currencies = new List<Currency>();
             currencies.Add(pln);
+            Guid id = Guid.NewGuid();
             Guid userId = Guid.NewGuid();
-            IBankAccount bankAccount = bank.CreateBankAccount(userId, currencies);
+            IBankAccount bankAccount = bank.CreateBankAccount(id, userId, currencies);
             
             Money m100 = new Money(100m, "PLN");
             Money m0 = new Money(0m, "PLN");
@@ -36,8 +34,9 @@ namespace BankAccount.BusinessLogic.Tests
             Currency pln = new Currency("PLN");
             var currencies = new List<Currency>();
             currencies.Add(pln);
+            Guid id = Guid.NewGuid();
             Guid userId = Guid.NewGuid();
-            IBankAccount bankAccount = bank.CreateBankAccount(userId, currencies);
+            IBankAccount bankAccount = bank.CreateBankAccount(id, userId, currencies);
 
             Money m100 = new Money(100m, "PLN");
             Money m0 = new Money(0m, "PLN");
@@ -63,8 +62,9 @@ namespace BankAccount.BusinessLogic.Tests
             Currency pln = new Currency("PLN");
             var currencies = new List<Currency>();
             currencies.Add(pln);
+            Guid id = Guid.NewGuid();
             Guid userId = Guid.NewGuid();
-            IBankAccount bankAccount = bank.CreateBankAccount(userId, currencies);
+            IBankAccount bankAccount = bank.CreateBankAccount(id, userId, currencies);
 
             Money m100 = new Money(100m, "PLN");
             Money m0 = new Money(0m, "PLN");
@@ -91,8 +91,9 @@ namespace BankAccount.BusinessLogic.Tests
             Currency pln = new Currency("PLN");
             var currencies = new List<Currency>();
             currencies.Add(pln);
+            Guid id = Guid.NewGuid();
             Guid userId = Guid.NewGuid();
-            IBankAccount bankAccount = bank.CreateBankAccount(userId, currencies);
+            IBankAccount bankAccount = bank.CreateBankAccount(id, userId, currencies);
 
             bankAccount.Deposit(pln, new Money(1m, "PLN"));
             bankAccount.Deposit(pln, new Money(200m, "PLN"));
@@ -129,8 +130,9 @@ namespace BankAccount.BusinessLogic.Tests
             Currency pln = new Currency("PLN");
             var currencies = new List<Currency>();
             currencies.Add(pln);
+            Guid id = Guid.NewGuid();
             Guid userId = Guid.NewGuid();
-            IBankAccount bankAccount = bank.CreateBankAccount(userId, currencies);
+            IBankAccount bankAccount = bank.CreateBankAccount(id, userId, currencies);
 
             bankAccount.Deposit(pln, new Money(1m, "PLN"));
             bankAccount.Deposit(pln, new Money(200m, "PLN"));
