@@ -1,4 +1,4 @@
-# BankAccountTask
+# BankAccount project
 This project is attempt of implementing Orchiestrator Architectural Pattern for web application.
 
 # To do list:
